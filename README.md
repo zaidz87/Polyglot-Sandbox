@@ -11,22 +11,7 @@ The system is split into three main components:
 2. **The Redis Datastore**: Acts as a high-speed memory cache for the API to enforce an IP-based rate limiting window.
 3. **The Docker Daemon & Runners**: Orchestrated dynamically by the API to spawn isolated instances strictly engineered to run untrusted code safely.
 
-```mermaid
-graph TD
-    User([User / HTTP Client]) -->|POST /execute <br/>{code, language}| API(Express.js API Wrapper)
-    
-    API -- Injects Cache/Checks Limit --> Redis[(Redis Rate Limiter)]
-    
-    API -- Spawns child process --> DockerHost[Host Docker Daemon]
-    
-    DockerHost -- Creates ephemeral container <br/> mounts code --> RunnerA{Python Runner}
-    DockerHost -- Creates ephemeral container <br/> mounts code --> RunnerB{Node.js Runner}
-    
-    RunnerA -- Returns stdout/stderr --> API
-    RunnerB -- Returns stdout/stderr --> API
-    
-    API -- Returns JSON response --> User
-```
+
 
 ---
 
