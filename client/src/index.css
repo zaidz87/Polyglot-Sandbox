@@ -1,0 +1,376 @@
+/* ============================================================
+   Global Design Tokens & Resets
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0a0a0f;
+  --bg-card:   #11111a;
+  --bg-modal:  #13131e;
+  --border:    rgba(255,255,255,0.08);
+  --green:     #7effa0;
+  --blue:      #5b8fff;
+  --pink:      #ff6b9d;
+  --text:      #e8e8f0;
+  --text-muted:#7a7a9a;
+  --font:      'Space Grotesk', sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+  --radius:    12px;
+  --radius-lg: 20px;
+  --shadow:    0 4px 32px rgba(0,0,0,0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+
+/* ============================================================
+   Grid-dot hero background
+   ============================================================ */
+.hero-grid-bg {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ============================================================
+   Animated pulse badge
+   ============================================================ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+.pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(126,255,160,0.08);
+  border: 1px solid rgba(126,255,160,0.25);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.02em;
+}
+
+.pulse-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--green), #4dcc78);
+  color: #0a0a0f;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(126,255,160,0.35);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+
+.btn-outline-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--green);
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(126,255,160,0.35);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.btn-outline-green:hover { background: rgba(126,255,160,0.08); box-shadow: 0 0 16px rgba(126,255,160,0.15); }
+
+/* ============================================================
+   Language tag pills
+   ============================================================ */
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.lang-pill:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+/* ============================================================
+   Feature cards
+   ============================================================ */
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+/* ============================================================
+   How it works steps
+   ============================================================ */
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 auto 16px;
+}
+
+/* ============================================================
+   Auth Modal overlay
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.modal-card {
+  background: var(--bg-modal);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  width: 100%;
+  max-width: 420px;
+  animation: slideUp 0.25s ease;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+
+/* ============================================================
+   Form inputs
+   ============================================================ */
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: rgba(126,255,160,0.4);
+  box-shadow: 0 0 0 3px rgba(126,255,160,0.08);
+}
+.form-input::placeholder { color: var(--text-muted); }
+
+/* ============================================================
+   Editor page layout
+   ============================================================ */
+.editor-layout {
+  display: flex;
+  height: 100vh;
+  background: #0d0d14;
+  overflow: hidden;
+}
+
+.editor-sidebar {
+  width: 60px;
+  background: #0a0a10;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 4px;
+}
+
+.sidebar-lang-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: background 0.2s, color 0.2s;
+  padding: 6px;
+}
+.sidebar-lang-btn:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+.sidebar-lang-btn.active { background: rgba(126,255,160,0.1); color: var(--green); }
+.sidebar-lang-btn span.lang-label { font-size: 8px; font-family: var(--mono); letter-spacing: 0.04em; }
+
+.editor-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.editor-topbar {
+  height: 50px;
+  background: #0a0a10;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.editor-center {
+  flex: 1;
+  overflow: hidden;
+}
+
+.output-panel {
+  height: 200px;
+  background: #08080f;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.output-panel-header {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.output-content {
+  flex: 1;
+  padding: 12px 16px;
+  overflow-y: auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   Run button glow
+   ============================================================ */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(126,255,160,0.4); }
+  50%       { box-shadow: 0 0 20px rgba(126,255,160,0.7); }
+}
+.btn-run {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, var(--green), #4dcc78);
+  color: #0a0a0f;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  animation: glow-pulse 2.5s ease-in-out infinite;
+  transition: transform 0.15s;
+}
+.btn-run:hover { transform: scale(1.04); }
+.btn-run:disabled { opacity: 0.5; cursor: not-allowed; animation: none; }
+
+/* ============================================================
+   Utility
+   ============================================================ */
+.text-green { color: var(--green); }
+.text-blue  { color: var(--blue); }
+.text-pink  { color: var(--pink); }
+.text-muted { color: var(--text-muted); }

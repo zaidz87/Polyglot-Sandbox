@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Redis cache handling rate limiting states
+  # Redis — handles rate limiting state
   redis:
     image: redis:7-alpine
     container_name: polyglot-redis
@@ -11,23 +11,23 @@ services:
 
   # Primary Express API backend
   api:
-    build: 
+    build:
       context: .
       dockerfile: containers/api/Dockerfile
     container_name: polyglot-api
     ports:
       - "3000:3000"
     environment:
-      # Inject network reference to locate redis service
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    # Load JWT_SECRET and any other secrets from the .env file
+    env_file:
+      - .env
     volumes:
-      # CRITICAL: Mounts the host Docker socket into the API container.
-      # This allows the Express interface to spawn new execution containers.
+      # CRITICAL: Docker socket lets the API spawn execution containers on the host daemon
       - /var/run/docker.sock:/var/run/docker.sock
-      # Mount /tmp to allow files to be passed to spawned containers
+      # Shared /tmp so temp code files written by the API are visible to spawned runners
       - /tmp:/tmp
     depends_on:
-      # Ensure Redis boots and is ready before the API attempts connection
       - redis
     restart: always

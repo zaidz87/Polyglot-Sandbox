@@ -1,0 +1,17 @@
+# Environment variables
+.env
+
+# SQLite database (auto-created at runtime)
+users.db
+
+# Build output
+dist/
+node_modules/
+
+# Frontend build
+client/node_modules/
+client/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
